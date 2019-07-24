@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Publication from '../Publication/Publication';
 import Counter from '../Counter/Counter';
 import Controls from '../Controls/Controls';
-import styles from '../Reader/Reader.module.css';
+import styles from './Reader.module.css';
 
 class Reader extends Component {
   state = {
@@ -22,10 +23,9 @@ class Reader extends Component {
     const { items } = this.props;
     const counterPlus = counter + 1;
     const counterLength = items.length;
-
     return (
       <div className={styles.reader}>
-        <Publication items={this.props.items[counter]} />
+        <Publication {...items[counter]} />
         <Counter start={counterPlus} end={counterLength} />
         <Controls
           length={counterLength}
@@ -37,5 +37,15 @@ class Reader extends Component {
     );
   }
 }
+
+Reader.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+};
 
 export default Reader;

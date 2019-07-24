@@ -25,7 +25,7 @@
   cursor: pointer;
 }
 
-.buttonDisable {
+.disable {
   display: inline-block;
   min-width: 240px;
   border: 0;
